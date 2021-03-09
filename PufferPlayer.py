@@ -7,10 +7,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.chrome.options import Options
+from pyvirtualdisplay import Display
 import time, sys, argparse, glob, random, string
 
 class PufferPlayer:
-    def __init__(self, numBrowsers, userNum, experimentName, folderName, link, headless=False):
+    def __init__(self, link, output_file, userNum, headless=False):
+        self.display = Display(visible=0, size=(1920, 1080))  
+        self.display.start()
+
         chrome_options = Options()
         chrome_options.add_argument('--disable-application-cache')
         chrome_options.add_argument('disable-application-cache')
@@ -18,7 +22,7 @@ class PufferPlayer:
         chrome_options.add_argument('ignore-certificate-errors')
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument('--ignore-ssl-errors')
-        # chrome_options.headless = headless
+        chrome_options.headless = headless
 
         self.driver = webdriver.Chrome(options=chrome_options) 
         self.driver.create_options()
@@ -30,13 +34,17 @@ class PufferPlayer:
         self.numDatapointsCollected = 0
         self.portalUsername = "maestorme{}".format(userNum)
         self.portalPassword = "cqxav7i"
+        # self.portalUsername = "maestorme"
+        # self.portalPassword = "2xLvvzd2k8aBwNm"
 
-        self.f = open("{}/mot-{}-{}.txt".format(folderName, numBrowsers, experimentName), "w")
-        self.f.write("{},{},{},{}\n".format(
+        self.f = open(output_file, "w")
+        self.f.write("{},{},{},{},{},{}\n".format(
+            "time",
             "resolution",
             "bufferHealth",
             "bitrate",
-            "currentTime"
+            "currentTime",
+            "rebuffering"
         ))
 
     def play(self):
@@ -106,6 +114,12 @@ class PufferPlayer:
 
     def start(self):
         self.throttle(self.throttleAmount)
+        self.startTime = time.time()
+        self.prevDetails = {
+            "currentTime": -1,
+            "time": 0
+        }
+
 
     def collectData(self):
         details = {}
@@ -115,12 +129,27 @@ class PufferPlayer:
         details["bufferHealth"] = self.bufferSpan.get_attribute("innerHTML")
         details["bitrate"] = self.bitrateSpan.get_attribute("innerHTML")
         details["currentTime"] =  self.driver.execute_script("return document.getElementsByTagName('video')[0].currentTime")
+        details["time"] = time.time() - self.startTime
+        details["rebuffering"] = 0
 
-        self.f.write("{},{},{},{}\n".format(
+        if details["resolution"] == "N/A" or details["bufferHealth"] == "N/A" or details['bitrate'] == "N/A":
+            return
+
+        rebuffering = abs((details["currentTime"] - self.prevDetails["currentTime"]) - (details["time"] - self.prevDetails["time"]))
+        if rebuffering > 0.1 and rebuffering < 2:
+            details["rebuffering"] = rebuffering
+            details["bitrate"] = (1-(rebuffering / (details["time"] - self.prevDetails["time"]))) * float(details["bitrate"])
+
+        self.prevDetails["currentTime"] = details["currentTime"]
+        self.prevDetails["time"] = details["time"]
+
+        self.f.write("{},{},{},{},{},{}\n".format(
+            details["time"],
             details["resolution"],
             details["bufferHealth"],
             details["bitrate"],
-            details["currentTime"]
+            details["currentTime"],
+            details["rebuffering"]
         ))
 
     def bufferCleared(self):
