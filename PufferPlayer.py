@@ -152,6 +152,8 @@ class PufferPlayer:
             details["rebuffering"]
         ))
 
+        return details["resolution"]
+
     def bufferCleared(self):
         buffer = float(self.bufferSpan.get_attribute("innerHTML"))
         if buffer < 1:

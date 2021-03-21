@@ -90,7 +90,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     start = time.time()
     t = start
     while True:
-        browser.collectData()
+        res = browser.collectData()
         numDatapointsCollected += 1
 
         # Exit condition
@@ -98,7 +98,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
-            print("[{}] - {}".format(playerNum, tc.bIdx))
+            print("[{}] - {} - {}".format(playerNum, tc.bIdx, res))
             t = time.time()
 
         time.sleep(datapointsInterval)
@@ -106,7 +106,9 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     browser.f.close()
     browser.driver.close()
     browser.driver.quit()
-    browser.display.stop()
+
+    if abr != "youtube":
+        browser.display.stop()
 
     return True
 
@@ -133,9 +135,10 @@ def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_ru
     threadOrchestrator(player, link, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path)
 
 if __name__ == "__main__":
-    traces = random.sample(os.listdir("Traces/"), 50)
-    link = "http://3.238.27.49:8080/player/"
-    abr = "puffer"
+    traces = random.sample(os.listdir("Traces/"), 100)
+    link = "http://3.239.110.219:8080/player/"
+    # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
+    abr = "mpc"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
@@ -144,6 +147,4 @@ if __name__ == "__main__":
     input("Running {}, press ENTER to continue...".format(abr))
 
     for idx, trace_name in enumerate(traces):
-        print("TRACE {}: {}".format(idx, trace_name))
         main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs)
-        break
