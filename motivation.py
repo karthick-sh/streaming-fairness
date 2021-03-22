@@ -32,7 +32,7 @@ def incrementTC(tc, barrier):
 
         time.sleep(0.5)
 
-def threadOrchestrator(player, link, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface):
+def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface):
     for run in range(numRuns):
         print("=======RUN {}-{}=======".format(NUM_BROWSERS, run))
         killWebdrivers()
@@ -46,7 +46,19 @@ def threadOrchestrator(player, link, abr, trace_dir, trace_file, datapointsInter
         for player_num in range(1, NUM_BROWSERS+1):
             processes.append(Process(
                 target=threadInstance,
-                args=(player, player_num, tc, run, NUM_BROWSERS, barrier, link, abr, trace_file, datapointsInterval, output_path)
+                args=(
+                    players[player_num-1]["player"],
+                    player_num,
+                    tc,
+                    run,
+                    NUM_BROWSERS,
+                    barrier,
+                    players[player_num-1]["link"],
+                    abr,
+                    trace_file,
+                    datapointsInterval,
+                    output_path
+                )
             ))
 
         for p in processes:
@@ -112,7 +124,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
 
     return True
 
-def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs, dev_interface):
+def mainHomogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_interval, num_runs, dev_interface):
     # Make result directories
     if not os.path.isdir(data_dir + abr):
         os.mkdir(data_dir + abr)
@@ -132,7 +144,37 @@ def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_ru
     else:
         player = PufferPlayer
 
-    threadOrchestrator(player, link, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
+    players = []
+    for _ in range(NUM_BROWSERS):
+        players.append({"player": player, "link": links[0]})
+
+    threadOrchestrator(players, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
+
+
+def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datapoints_interval, num_runs, dev_interface):
+    # Make result directories
+    if not os.path.isdir(data_dir + composition):
+        os.mkdir(data_dir + composition)
+
+    if not os.path.isdir(os.path.join(data_dir, composition, trace_name)):
+        os.mkdir(os.path.join(data_dir, composition, trace_name))
+    else:
+        num_files = len(os.listdir(os.path.join(data_dir, composition, trace_name)))
+        print("{} already exists with {} files.".format(os.path.join(data_dir, composition, trace_name), num_files))
+        return
+
+    output_path = os.path.join(data_dir, composition, trace_name)
+
+    # Setup player objects according to composition
+    # Hardcoding to MPC and pensieve now
+    players = []
+    for _ in range(NUM_BROWSERS):
+        players.append({
+            "player": PufferPlayer,
+            "link": links[i],
+        })
+
+    threadOrchestrator(players, composition, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
 
 def get_trace_list(trace_file):
     with open(trace_file) as f:
@@ -143,8 +185,14 @@ if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
     # link = "http://3.239.110.219:8080/player/"
-    link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
-    abr = "youtube"
+    # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
+    links = [
+        "",
+        "",
+        "",
+        "",
+    ]
+    abr = "mpc-1-pensieve-3"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
@@ -155,4 +203,4 @@ if __name__ == "__main__":
 
     for idx, trace_name in enumerate(traces):
         print("~~~~~~~~~`[{}] - {}~~~~~~~~~~~~~~~".format(idx, trace_name))
-        main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs, dev_interface)
+        mainHeterogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_interval, num_runs, dev_interface)
