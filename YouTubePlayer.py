@@ -17,7 +17,7 @@ class YouTubePlayer:
         # self.display = Display(visible=0, size=(1920, 1080))
         # self.display.start()
 
-        path_to_extension = r'/home/ubuntu/streaming-fairness/extensions/adblocker_3.10.2_0'
+        path_to_extension = r'/home/karthick-sh/Desktop/streaming-fairness/extensions/1.34.0_0'
         chrome_options = Options()
         chrome_options.add_argument('load-extension=' + path_to_extension)
         chrome_options.add_argument('--disable-application-cache')
@@ -26,11 +26,11 @@ class YouTubePlayer:
         chrome_options.add_argument('ignore-certificate-errors')
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument('--ignore-ssl-errors')
-        chrome_options.add_argument("window-size=2880,1680")
-        chrome_options.add_argument('window-size=2880x1680')
+        chrome_options.add_argument("window-size=1920x1080")
+        # chrome_options.add_argument('window-size=2880x1680')
         chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.headless = True
+        # chrome_options.add_argument('--no-sandbox')
+        chrome_options.headless = False
 
         self.driver = webdriver.Chrome(options=chrome_options) 
         self.driver.create_options()
@@ -87,7 +87,7 @@ class YouTubePlayer:
     
     def initVideo(self):
         self.driver.get(self.link)
-        print("Old viewport size:", self.driver.get_window_size())
+        # print("Old viewport size:", self.driver.get_window_size())
         # self.driver.set_window_size(1920, 1080)
         # print("New viewport size:", self.driver.get_window_size())
 

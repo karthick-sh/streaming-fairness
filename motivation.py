@@ -32,12 +32,12 @@ def incrementTC(tc, barrier):
 
         time.sleep(0.5)
 
-def threadOrchestrator(player, link, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path):
+def threadOrchestrator(player, link, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface):
     for run in range(numRuns):
         print("=======RUN {}-{}=======".format(NUM_BROWSERS, run))
         killWebdrivers()
 
-        tc = TrafficController(trace_dir + trace_file, "ens5")
+        tc = TrafficController(trace_dir + trace_file, dev_interface)
 
         processes = []
 
@@ -79,7 +79,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             browser.f.close()
             browser.driver.close()
             browser.driver.quit()
-            browser = player(output_file, link, False)
+            browser = player(link, output_file, playerNum, True)
             time.sleep(2)
 
     # Barrier to wait for all browsers to be ready
@@ -112,7 +112,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
 
     return True
 
-def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs):
+def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs, dev_interface):
     # Make result directories
     if not os.path.isdir(data_dir + abr):
         os.mkdir(data_dir + abr)
@@ -132,19 +132,27 @@ def main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_ru
     else:
         player = PufferPlayer
 
-    threadOrchestrator(player, link, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path)
+    threadOrchestrator(player, link, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
+
+def get_trace_list(trace_file):
+    with open(trace_file) as f:
+        traces = [t.strip() for t in f.readlines()]
+    return traces
 
 if __name__ == "__main__":
-    traces = random.sample(os.listdir("Traces/"), 100)
-    link = "http://3.239.110.219:8080/player/"
-    # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
-    abr = "mpc"
+    # traces = random.sample(os.listdir("Traces/"), 100)
+    traces = get_trace_list("pensieve_traces.txt")
+    # link = "http://3.239.110.219:8080/player/"
+    link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
+    abr = "youtube"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
     num_runs = 1
+    dev_interface = "wlo1"
 
     input("Running {}, press ENTER to continue...".format(abr))
 
     for idx, trace_name in enumerate(traces):
-        main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs)
+        print("~~~~~~~~~`[{}] - {}~~~~~~~~~~~~~~~".format(idx, trace_name))
+        main(data_dir, trace_dir, trace_name, abr, link, datapoints_interval, num_runs, dev_interface)
