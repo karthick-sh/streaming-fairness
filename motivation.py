@@ -11,7 +11,7 @@ from Barrier import Barrier
 from PufferPlayer import PufferPlayer
 from YouTubePlayer import YouTubePlayer
 
-NUM_BROWSERS = 4
+NUM_BROWSERS = 1
 MAX_TRACE_LEN = 320 #seconds
 
 def killWebdrivers():
@@ -168,7 +168,7 @@ def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datap
     # Setup player objects according to composition
     # Hardcoding to MPC and pensieve now
     players = []
-    for _ in range(NUM_BROWSERS):
+    for i in range(NUM_BROWSERS):
         players.append({
             "player": PufferPlayer,
             "link": links[i],
@@ -186,18 +186,20 @@ if __name__ == "__main__":
     traces = get_trace_list("pensieve_traces.txt")
     # link = "http://3.239.110.219:8080/player/"
     # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
-    links = [
-        "",
-        "",
-        "",
-        "",
-    ]
-    abr = "mpc-1-pensieve-3"
+    #links = [
+    #        "http://3.238.155.139:8080/player/",
+    #        "http://3.239.5.170:8080/player/",
+    #        "http://35.175.174.228:8080/player/",
+    #        "http://18.205.66.65:8080/player/",
+    #]
+    #abr = "mpc-1-robust_mpc-1-bola-1-bba-1"
+    links = ["http://34.231.242.33:8080/player/"]
+    abr = "bola-only"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
     num_runs = 1
-    dev_interface = "wlo1"
+    dev_interface = "ens5"
 
     input("Running {}, press ENTER to continue...".format(abr))
 
