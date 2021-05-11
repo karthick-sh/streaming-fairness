@@ -11,7 +11,7 @@ from Barrier import Barrier
 from PufferPlayer import PufferPlayer
 from YouTubePlayer import YouTubePlayer
 
-NUM_BROWSERS = 1
+NUM_BROWSERS = 4
 MAX_TRACE_LEN = 320 #seconds
 
 def killWebdrivers():
@@ -110,7 +110,8 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
-            print("[{}] - {} - {}".format(playerNum, tc.bIdx, res))
+            browser.throttle(nextBw/NUM_BROWSERS)
+            print("[{}] - {}({}) - {}".format(playerNum, tc.bIdx, nextBw, res))
             t = time.time()
 
         time.sleep(datapointsInterval)
@@ -186,15 +187,15 @@ if __name__ == "__main__":
     traces = get_trace_list("pensieve_traces.txt")
     # link = "http://3.239.110.219:8080/player/"
     # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
-    #links = [
-    #        "http://3.238.155.139:8080/player/",
-    #        "http://3.239.5.170:8080/player/",
-    #        "http://35.175.174.228:8080/player/",
-    #        "http://18.205.66.65:8080/player/",
-    #]
-    #abr = "mpc-1-robust_mpc-1-bola-1-bba-1"
-    links = ["http://34.231.242.33:8080/player/"]
-    abr = "bola-only"
+    links = [
+            "http://3.227.248.129:8080/player/",
+            "http://3.215.77.43:8080/player/",
+            "http://3.233.232.98:8080/player/",
+            "http://3.236.124.104:8080/player/",
+    ]
+    abr = "mpc-1-robust_mpc-1-bola-1-bba-1-SHAPED"
+    #links = ["http://34.231.242.33:8080/player/"]
+    #abr = "bola-only"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
