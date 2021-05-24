@@ -12,8 +12,10 @@ import time, sys, argparse, glob, random, string
 
 class PufferPlayer:
     def __init__(self, link, output_file, userNum, headless=False):
-        self.display = Display(visible=0, size=(1920, 1080))  
-        self.display.start()
+        self.headless = headless
+        # if headless:
+        #     self.display = Display(visible=0, size=(1920, 1080))  
+        #     self.display.start()
 
         chrome_options = Options()
         chrome_options.add_argument('--disable-application-cache')
@@ -152,10 +154,15 @@ class PufferPlayer:
             details["rebuffering"]
         ))
 
-        return details["resolution"]
+        return "{} - {}".format(details["currentTime"], details["resolution"])
 
     def bufferCleared(self):
         buffer = float(self.bufferSpan.get_attribute("innerHTML"))
         if buffer < 1:
             return True
         return False
+
+    def stopDisplay(self):
+        # if self.headless:
+        #     self.display.stop()
+        return

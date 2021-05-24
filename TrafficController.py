@@ -13,7 +13,7 @@ class TrafficController:
         self.t = time.time()
 
         # TC Configs
-        self.password = ""
+        self.password = "cqxav7i"
         self.tc_path = "/sbin/tc"
         self.dev_interface = dev_interface
         self.base_throttle_mbit = 16

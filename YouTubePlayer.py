@@ -116,6 +116,9 @@ class YouTubePlayer:
             "time": 0
         }
 
+    def stopDisplay(self):
+        return
+
     def collectData(self):
         details = {}
 
@@ -156,7 +159,7 @@ class YouTubePlayer:
         details["bitrate"] = prev[bitrateCol]/1000
 
         rebuffering = abs((details["currentTime"] - self.prevDetails["currentTime"]) - (details["time"] - self.prevDetails["time"]))
-        if rebuffering > 0.1 and rebuffering < 15:
+        if rebuffering > 0.1 and rebuffering < 10:
             details["rebuffering"] = rebuffering
             details["bitrate"] = (1-(rebuffering / (details["time"] - self.prevDetails["time"]))) * float(details["bitrate"])
 

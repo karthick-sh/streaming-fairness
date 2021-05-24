@@ -110,7 +110,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
-            browser.throttle(nextBw/NUM_BROWSERS)
+            # browser.throttle(nextBw/NUM_BROWSERS)
             print("[{}] - {}({}) - {}".format(playerNum, tc.bIdx, nextBw, res))
             t = time.time()
 
@@ -120,8 +120,7 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     browser.driver.close()
     browser.driver.quit()
 
-    if abr != "youtube":
-        browser.display.stop()
+    browser.stopDisplay()
 
     return True
 
@@ -170,10 +169,16 @@ def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datap
     # Hardcoding to MPC and pensieve now
     players = []
     for i in range(NUM_BROWSERS):
-        players.append({
-            "player": PufferPlayer,
-            "link": links[i],
-        })
+        if "youtube" in links[i]:
+            players.append({
+                "player": YouTubePlayer,
+                "link": links[i],
+            })
+        else:
+            players.append({
+                "player": PufferPlayer,
+                "link": links[i],
+            })
 
     threadOrchestrator(players, composition, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
 
@@ -185,17 +190,15 @@ def get_trace_list(trace_file):
 if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
-    # link = "http://3.239.110.219:8080/player/"
+    # link = "http://3.234.178.171:8080/player/"
     # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
     links = [
-            "http://3.227.248.129:8080/player/",
-            "http://3.215.77.43:8080/player/",
-            "http://3.233.232.98:8080/player/",
-            "http://3.236.124.104:8080/player/",
+        "https://www.youtube.com/watch?v=QZUeW8cQQbo",
+        "https://www.youtube.com/watch?v=QZUeW8cQQbo",
+        "http://18.206.136.34:8080/player/",
+        "http://18.206.136.34:8080/player/",
     ]
-    abr = "mpc-1-robust_mpc-1-bola-1-bba-1-SHAPED"
-    #links = ["http://34.231.242.33:8080/player/"]
-    #abr = "bola-only"
+    abr = "youtube-2-bola-2"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"

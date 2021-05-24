@@ -1,0 +1,26 @@
+# Constants
+lookback = 0-7 (inclusive)
+lookahead = 0-2 (inclusive)
+throuhgput_estimators = [
+    hmean,
+    np.mean,
+    generate_ewma(alpha) for alpha in np.linspace(0.15, 0.95, 5)
+    generate_percentile(percentile) for percentile in np.linspace(0.15, 0.95, 5)
+]
+
+# Definitely required / easy to add
+buffer_size
+throughput_variance (basically np.std over all possible lookbacks of throughput)
+download_time
+segment_length (np.mean)
+encoded_mbitrate[-1]
+chunk_size
+
+# Potentially can add
+expected_segment_length_s
+future_download_time (for all possible lookahead for all possible tput pred)
+future_buffer_filling (for all possible lookahead for all possible tput pred)
+future_mbit_discounted (for all possible lookahead for all possible tput pred)
+future_vmaf_discounted (for all possible lookahead for all possible tput pred)
+linear_qoe_normalized (summary_function = max) (for all possible lookahead for all possible tput pred)
+linear_qoe_raw (summary_function = max) (for all possible lookahead for all possible tput pred)

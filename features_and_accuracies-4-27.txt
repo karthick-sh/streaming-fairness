@@ -1,0 +1,27 @@
+# All features, lin reg deg 2, window 10
+Average Test RMSE:  3.440895532663078
+Average Train RMSE:  0.6294778179880852
+
+# All features, lin reg deg 2, window 7
+Average Test RMSE:  1.6235430322452205
+Average Train RMSE:  0.6472411370649493
+
+# All features, lin reg deg 2, window 5
+Average Test RMSE:  1.2427202874057897
+Average Train RMSE:  0.7247705316859288
+
+# All features except mbit and percentile, lin reg deg 3, window 3
+Average Test RMSE:  5.729669476044702
+Average Train RMSE:  0.6216863426050804
+
+# All features except mbit and percentile, lin reg deg 2, window 3
+Average Test RMSE:  1.0685041591945195
+Average Train RMSE:  0.8907882146894098
+
+# All features except mbit and percentile, lin reg deg 2, window 5
+Average Test RMSE:  1.148357817743386
+Average Train RMSE:  0.7989435657750679
+
+# All features except percentile, lin reg deg 2, window 5
+Average Test RMSE:  1.126755645319287
+Average Train RMSE:  0.7504730843422309
