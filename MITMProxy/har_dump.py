@@ -14,6 +14,7 @@ import base64
 import zlib
 import os
 import typing  # noqa
+import time
 
 from datetime import datetime
 from datetime import timezone
@@ -48,7 +49,8 @@ def configure(updated):
                 "version": "0.1",
                 "comment": "mitmproxy version %s" % version.MITMPROXY
             },
-            "entries": []
+            "entries": [],
+            "messages": []
         }
     })
 
@@ -218,3 +220,34 @@ def name_value(obj):
         Convert (key, value) pairs to HAR format.
     """
     return [{"name": k, "value": v} for k, v in obj.items()]
+
+def parse_websocket_message(content):
+    numOpens = 0
+    parsed = ""
+    for c in content:
+        if c == "{":
+            numOpens += 1
+        elif c == "}":
+            numOpens -= 1
+        
+        parsed += c
+
+        if numOpens == 0:
+            break
+    return json.loads(parsed)
+
+def websocket_message(flow):
+    # get the latest message
+    message = flow.messages[-1]
+
+    # was the message sent from the client or server?
+    if message.from_client:
+        parsed_message = json.loads(message.content)
+        parsed_message["currentTimestamp"] = time.time()
+        parsed_message["receivedTimestamp"] = message.timestamp
+        HAR["log"]["messages"].append(parsed_message)
+    else:
+        parsed_message = parse_websocket_message(message.content[2:300].decode('utf-8','ignore'))
+        parsed_message["currentTimestamp"] = time.time()
+        parsed_message["receivedTimestamp"] = message.timestamp
+        HAR["log"]["messages"].append(parsed_message)

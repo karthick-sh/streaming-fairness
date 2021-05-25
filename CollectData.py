@@ -1,8 +1,7 @@
 from TrafficController import TrafficController
 from YouTubePlayer import YouTubePlayer
 from PufferPlayer import PufferPlayer
-from BrowserMobProxy.BrowserMobProxy import BrowserMobProxy
-from BrowserMobProxy.BWEstimator import BWEstimator
+from MITMProxy.MITMProxy import MITMProxy
 from Barrier import Barrier
 from selenium.common.exceptions import ElementClickInterceptedException
 from multiprocessing import Process
@@ -46,7 +45,9 @@ def threadOrchestrator(player, abr, trace_dir, trace_file, datapointsInterval, n
         killWebdrivers()
 
         tc = TrafficController(trace_dir + trace_file, dev_interface)
-        bmp = BrowserMobProxy(9001)
+        
+        proxy = MITMProxy(9001)
+        proxy.startProxy("{}/proxy".format(output_path))
 
         barrier = Barrier(2)
 
@@ -63,7 +64,7 @@ def threadOrchestrator(player, abr, trace_dir, trace_file, datapointsInterval, n
                 trace_file,
                 datapointsInterval,
                 output_path,
-                bmp
+                proxy
             )
         )
 
@@ -78,12 +79,13 @@ def threadOrchestrator(player, abr, trace_dir, trace_file, datapointsInterval, n
         time.sleep(1)
         videoProcess.terminate()
         killWebdrivers()
-        # bmp.stopProxy()
+        
+        proxy.stopProxy()
 
         time.sleep(10)
 
 def threadInstance(player, playerNum, tc, run, barrier, link, abr, traceFile, datapointsInterval, output_path, proxy):
-    output_file = os.path.join(output_path, "{}-{}".format(abr, run))
+    output_file = os.path.join(output_path, "player_data-{}-{}".format(abr, run))
     browser = player(link, output_file, playerNum, headless=False, proxy=proxy)
 
     while True:
@@ -105,8 +107,9 @@ def threadInstance(player, playerNum, tc, run, barrier, link, abr, traceFile, da
     numDatapointsCollected = 0
     start = time.time()
     t = start
+    nextBw = tc.bandwidths[0]
     while True:
-        res, _ = browser.collectProxyData()
+        res, _ = browser.collectData(nextBw)
         numDatapointsCollected += 1
 
         # Exit condition
@@ -115,7 +118,6 @@ def threadInstance(player, playerNum, tc, run, barrier, link, abr, traceFile, da
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
             print("[{}] - {}({}) - {}".format(playerNum, tc.bIdx, nextBw, res))
-            browser.bwWindow.appendleft(nextBw)
             t = time.time()
 
         time.sleep(datapointsInterval)
@@ -125,7 +127,6 @@ def threadInstance(player, playerNum, tc, run, barrier, link, abr, traceFile, da
     browser.driver.quit()
 
     browser.stopDisplay()
-    browser.proxy.stopProxy()
 
     return True
 
@@ -164,7 +165,7 @@ def countNumLines(traceDir):
 if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
-    link = "http://18.206.136.34:8080/player/"
+    link = "http://3.236.180.116:8080/player/"
     abr = "mpc"
     datapoints_interval = 1
     data_dir = "Data/ReverseEngineering/"

@@ -7,35 +7,43 @@ class MITMProxy:
     def __init__(self, port):
         self.port = port
         self.host = 'localhost'
+        self.url = "{}:{}".format(self.host, self.port)
         self.har_name = 'dump'
         self.proxy = None
 
     def makeNewHAR(self, har_name):
         self.har_name = har_name
     
-    def startProxy(self):
-        self.stdout_file = open("{}-proxy_stdout.txt".format(self.har_name), "w")
-        self.stderr_file = open("{}-proxy_stderr.txt".format(self.har_name), "w")
+    def startProxy(self, har_name):
+        self.har_name = har_name
+        # print(self.har_name)
+        self.stdout_file = open("{}_stdout.txt".format(self.har_name), "w")
         self.proxy = Popen([
             'mitmdump',
-            '-s', './har_dump.py',
-            '--set', 'hardump=./{}.har'.format(self.har_name),
+            '-s', './MITMProxy/har_dump.py',
+            '--set', 'hardump=./{}_har.har'.format(self.har_name),
             '--set', 'listen_port={}'.format(self.port)
-        ], stdout=self.stdout_file, stderr=self.stderr_file)
+        ], stdout=self.stdout_file)
         time.sleep(2)
         print("[MITMProxy] Started proxy at {}:{}".format(self.host, self.port))
-        
+    
+    def startTest(self):
+        self.stdout_file = open("test_stdout.txt", "w")
+        self.proxy = Popen([
+            'mitmdump',
+            '-s', './websocket_simple.py',
+            '--set', 'listen_port={}'.format(self.port)
+        ], stdout=self.stdout_file)
+
     def stopProxy(self):
         if self.proxy:
             self.stdout_file.close()
-            self.stderr_file.close()
             self.proxy.terminate()
 
 def test():
     proxy = MITMProxy(9001)
-    proxy.makeNewHAR("puffer")
-    proxy.startProxy()
-    # proxy.proxy.proxy_autoconfig_url = pathlib.Path("/home/karthick-sh/Desktop/streaming-fairness/BrowserMobProxy/pac_file_ws.pac").as_uri()
+    proxy.startProxy("puffer")
+    # proxy.startTest()
 
     chrome_options = Options()
     chrome_options.add_argument('--disable-application-cache')
@@ -51,7 +59,7 @@ def test():
     
     driver.get("http://3.236.180.116:8080/player/")
     # driver.get("https://www.youtube.com/watch?v=QZUeW8cQQbo")
-    time.sleep(10)
+    time.sleep(20)
     # for i in range(10):
     #     media_requests = proxy.getMediaRequests()
     #     proxy.parseMediaRequests(media_requests)
