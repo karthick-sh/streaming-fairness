@@ -1,0 +1,120 @@
+Newly Downloaded
+[
+    {'timestamp_start': 1611340838.057, 'timestamp_finish': 1611340839.922, 'n_segment': 'itag: 244_range: 0-172265', 't_download_s': 0.187, 'body_size_byte': 172266, 'bandwidth_mbit': 7.369668449197861, 'byte_start': 0.0, 'byte_end': 172265.0
+    },
+    {'timestamp_start': 1611340839.092, 'timestamp_finish': 1611340839.172, 'n_segment': 'itag: 244_range: 172266-343161', 't_download_s': 0.042, 'body_size_byte': 170896, 'bandwidth_mbit': 32.55161904761904, 'byte_start': 172266.0, 'byte_end': 343161.0
+    },
+    {'timestamp_start': 1611340839.503, 'timestamp_finish': 1611340839.734, 'n_segment': 'itag: 244_range: 343162-435223', 't_download_s': 0.064, 'body_size_byte': 92062, 'bandwidth_mbit': 11.507749999999998, 'byte_start': 343162.0, 'byte_end': 435223.0
+    },
+    {'timestamp_start': 1611340840.204, 'timestamp_finish': 1611340840.963, 'n_segment': 'itag: 248_range: 0-2348', 't_download_s': 0.001, 'body_size_byte': 2349, 'bandwidth_mbit': 18.791999999999998, 'byte_start': 0.0, 'byte_end': 2348.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340838.057, 'timestamp_finish': 1611340839.922, 'n_segment': 'itag: 244_range: 0-172265', 't_download_s': 0.187, 'body_size_byte': 172266, 'bandwidth_mbit': 7.369668449197861, 'byte_start': 0.0, 'byte_end': 172265.0
+    },
+    {'timestamp_start': 1611340839.092, 'timestamp_finish': 1611340839.172, 'n_segment': 'itag: 244_range: 172266-343161', 't_download_s': 0.042, 'body_size_byte': 170896, 'bandwidth_mbit': 32.55161904761904, 'byte_start': 172266.0, 'byte_end': 343161.0
+    },
+    {'timestamp_start': 1611340839.503, 'timestamp_finish': 1611340839.734, 'n_segment': 'itag: 244_range: 343162-435223', 't_download_s': 0.064, 'body_size_byte': 92062, 'bandwidth_mbit': 11.507749999999998, 'byte_start': 343162.0, 'byte_end': 435223.0
+    },
+    {'timestamp_start': 1611340840.204, 'timestamp_finish': 1611340840.963, 'n_segment': 'itag: 248_range: 0-2348', 't_download_s': 0.001, 'body_size_byte': 2349, 'bandwidth_mbit': 18.791999999999998, 'byte_start': 0.0, 'byte_end': 2348.0
+    },
+    {'timestamp_start': 1611340840.611, 'timestamp_finish': 1611340840.69, 'n_segment': 'itag: 244_range: 435224-636051', 't_download_s': 0.001, 'body_size_byte': -1, 'bandwidth_mbit': -0.008, 'byte_start': 435224.0, 'byte_end': 636051.0
+    }
+]
+Newly Downloaded
+[
+    {'timestamp_start': 1611340840.611, 'timestamp_finish': 1611340843.5640001, 'n_segment': 'itag: 244_range: 435224-636051', 't_download_s': 2.874, 'body_size_byte': 200828, 'bandwidth_mbit': 0.5590201809324982, 'byte_start': 435224.0, 'byte_end': 636051.0
+    }
+]
+Newly Recorded
+[]
+
+Newly Downloaded
+[
+    {'timestamp_start': 1611340845.025, 'timestamp_finish': 1611340845.5870001, 'n_segment': 'itag: 244_range: 636052-651256', 't_download_s': 0.231, 'body_size_byte': 15205, 'bandwidth_mbit': 0.5265800865800866, 'byte_start': 636052.0, 'byte_end': 651256.0
+    },
+    {'timestamp_start': 1611340846.063, 'timestamp_finish': 1611340846.328, 'n_segment': 'itag: 242_range: 0-2248', 't_download_s': 0.001, 'body_size_byte': 2249, 'bandwidth_mbit': 17.991999999999997, 'byte_start': 0.0, 'byte_end': 2248.0
+    },
+    {'timestamp_start': 1611340846.198, 'timestamp_finish': 1611340846.269, 'n_segment': 'itag: 244_range: 651257-821266', 't_download_s': 0.049, 'body_size_byte': 170010, 'bandwidth_mbit': 27.75673469387755, 'byte_start': 651257.0, 'byte_end': 821266.0
+    },
+    {'timestamp_start': 1611340846.289, 'timestamp_finish': 1611340846.509, 'n_segment': 'itag: 243_range: 0-2249', 't_download_s': 0.001, 'body_size_byte': 2250, 'bandwidth_mbit': 18.0, 'byte_start': 0.0, 'byte_end': 2249.0
+    },
+    {'timestamp_start': 1611340846.56, 'timestamp_finish': 1611340846.7589998, 'n_segment': 'itag: 244_range: 821267-831234', 't_download_s': 0.001, 'body_size_byte': 9968, 'bandwidth_mbit': 79.744, 'byte_start': 821267.0, 'byte_end': 831234.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340845.025, 'timestamp_finish': 1611340845.5870001, 'n_segment': 'itag: 244_range: 636052-651256', 't_download_s': 0.231, 'body_size_byte': 15205, 'bandwidth_mbit': 0.5265800865800866, 'byte_start': 636052.0, 'byte_end': 651256.0
+    },
+    {'timestamp_start': 1611340846.063, 'timestamp_finish': 1611340846.328, 'n_segment': 'itag: 242_range: 0-2248', 't_download_s': 0.001, 'body_size_byte': 2249, 'bandwidth_mbit': 17.991999999999997, 'byte_start': 0.0, 'byte_end': 2248.0
+    },
+    {'timestamp_start': 1611340846.198, 'timestamp_finish': 1611340846.269, 'n_segment': 'itag: 244_range: 651257-821266', 't_download_s': 0.049, 'body_size_byte': 170010, 'bandwidth_mbit': 27.75673469387755, 'byte_start': 651257.0, 'byte_end': 821266.0
+    },
+    {'timestamp_start': 1611340846.289, 'timestamp_finish': 1611340846.509, 'n_segment': 'itag: 243_range: 0-2249', 't_download_s': 0.001, 'body_size_byte': 2250, 'bandwidth_mbit': 18.0, 'byte_start': 0.0, 'byte_end': 2249.0
+    },
+    {'timestamp_start': 1611340846.56, 'timestamp_finish': 1611340846.7589998, 'n_segment': 'itag: 244_range: 821267-831234', 't_download_s': 0.001, 'body_size_byte': 9968, 'bandwidth_mbit': 79.744, 'byte_start': 821267.0, 'byte_end': 831234.0
+    }
+]
+
+Newly Downloaded
+[]
+Newly Recorded
+[
+    {'timestamp_start': 1611340846.794, 'timestamp_finish': 1611340846.833, 'n_segment': 'itag: 243_range: 527975-677452', 't_download_s': 0.001, 'body_size_byte': -1, 'bandwidth_mbit': -0.008, 'byte_start': 527975.0, 'byte_end': 677452.0
+    }
+]
+
+Newly Downloaded
+[
+    {'timestamp_start': 1611340846.794, 'timestamp_finish': 1611340848.0419998, 'n_segment': 'itag: 243_range: 527975-677452', 't_download_s': 1.209, 'body_size_byte': 149478, 'bandwidth_mbit': 0.9891017369727046, 'byte_start': 527975.0, 'byte_end': 677452.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340848.384, 'timestamp_finish': 1611340848.404, 'n_segment': 'itag: 243_range: 677453-990881', 't_download_s': 0.001, 'body_size_byte': -1, 'bandwidth_mbit': -0.008, 'byte_start': 677453.0, 'byte_end': 990881.0
+    }
+]
+
+Newly Downloaded
+[
+    {'timestamp_start': 1611340848.384, 'timestamp_finish': 1611340849.43, 'n_segment': 'itag: 243_range: 677453-990881', 't_download_s': 1.025, 'body_size_byte': 313429, 'bandwidth_mbit': 2.4462751219512198, 'byte_start': 677453.0, 'byte_end': 990881.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340850.212, 'timestamp_finish': 1611340850.3409998, 'n_segment': 'itag: 243_range: 990882-1951022', 't_download_s': 0.001, 'body_size_byte': -1, 'bandwidth_mbit': -0.008, 'byte_start': 990882.0, 'byte_end': 1951022.0
+    }
+]
+
+Newly Downloaded
+[
+    {'timestamp_start': 1611340850.727, 'timestamp_finish': 1611340851.248, 'n_segment': 'itag: 247_range: 0-2286', 't_download_s': 0.001, 'body_size_byte': 2287, 'bandwidth_mbit': 18.296, 'byte_start': 0.0, 'byte_end': 2286.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340850.727, 'timestamp_finish': 1611340851.248, 'n_segment': 'itag: 247_range: 0-2286', 't_download_s': 0.001, 'body_size_byte': 2287, 'bandwidth_mbit': 18.296, 'byte_start': 0.0, 'byte_end': 2286.0
+    }
+]
+
+Newly Downloaded
+[]
+Newly Recorded
+[]
+
+Newly Downloaded
+[
+    {'timestamp_start': 1611340850.212, 'timestamp_finish': 1611340853.6369998, 'n_segment': 'itag: 243_range: 990882-1951022', 't_download_s': 3.2960000000000003, 'body_size_byte': 960141, 'bandwidth_mbit': 2.3304393203883493, 'byte_start': 990882.0, 'byte_end': 1951022.0
+    }
+]
+Newly Recorded
+[
+    {'timestamp_start': 1611340853.66, 'timestamp_finish': 1611340854.049, 'n_segment': 'itag: 248_range: 13846861-15681056', 't_download_s': 0.001, 'body_size_byte': -1, 'bandwidth_mbit': -0.008, 'byte_start': 13846861.0, 'byte_end': 15681056.0
+    }
+]
+
+Newly Downloaded
+[]
+Newly Recorded
+[]

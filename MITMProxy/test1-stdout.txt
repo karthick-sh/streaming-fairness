@@ -1,0 +1,217 @@
+Loading script ./har_dump.py
+Proxy server listening at http://*:9001
+[::1]:34098: clientconnect
+[::1]:34100: clientconnect
+[::1]:34102: clientconnect
+[::1]:34098: POST https://accounts.google.com/ListAccounts?gpsia=1&source=ChromiumBrowser&json=standard HTTP/2.0
+          << 200  45b
+[::1]:34100: CONNECT www.youtube.com:443
+ << Cannot establish TLS with client (sni: www.youtube.com): TlsException("(104, 'ECONNRESET')",)
+[::1]:34100: clientdisconnect
+[::1]:34102: GET https://www.youtube.com/watch?v=QZUeW8cQQbo HTTP/2.0
+          << 200  74.26k
+[::1]:34106: clientconnect
+[::1]:34108: clientconnect
+[::1]:34110: clientconnect
+[::1]:34112: clientconnect
+[::1]:34110: GET https://r4---sn-p5qlsndz.googlevideo.com/generate_204
+          << 204 No Content 0b
+[::1]:34112: GET https://r4---sn-p5qlsndz.googlevideo.com/generate_204?conn2
+          << 204 No Content 0b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/custom-elements-es5-adapter.vflset/custom-elements-es5-adapter.js HTTP/2.0
+          << 200  708b
+[::1]:34108: GET https://fonts.googleapis.com/css?family=Roboto:500,300,700,400|YouTube+Sans:400,500,700 HTTP/2.0
+          << 200  906b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/webcomponents-sd.vflset/webcomponents-sd.js HTTP/2.0
+          << 200  20.81k
+[::1]:34114: clientconnect
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/scheduler.vflset/scheduler.js HTTP/2.0
+          << 200  2.5k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-main-desktop-player-skeleton.css HTTP/2.0
+          << 200  470b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-onepick.css HTTP/2.0
+          << 200  239b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/www-i18n-constants-en_US.vflset/www-i18n-constants.js HTTP/2.0
+          << 200  1.34k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/network.vflset/network.js HTTP/2.0
+          << 200  5.14k
+[::1]:34106: GET https://i.ytimg.com/generate_204 HTTP/2.0
+          << 204  0b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/web-animations-next-lite.min.vflset/web-animations-next-lite.min.js HTTP/2.0
+          << 200  14.79k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-main-desktop-watch-page-skeleton.css HTTP/2.0
+          << 200  929b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/spf.vflset/spf.js HTTP/2.0
+          << 200  12.96k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/www-player-webp.css HTTP/2.0
+          << 200  45.04k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/desktop_polymer.vflset/desktop_polymer.js HTTP/2.0
+          << 200  1.15m
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/base.js HTTP/2.0
+          << 200  465.28k
+[::1]:34118: clientconnect
+[::1]:34120: clientconnect
+[::1]:34118: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=396&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278%2C394%2C395%2C396%2C397%2C398%2C399&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=video%2Fmp4&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=12367542&dur=594.000&lmt=1618740551880601&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRAIgPARY7u8eaz1HegOj-YVZ3zedJCPKp0Kipltr31B9f-8CIDrLt3nZ4Xxx7DnMgSmgdvVvXZMbdkpLL7br2L1VLg_N&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=0-91666&rn=1&rbuf=0
+          << 200 OK 89.52k
+[::1]:34102: POST https://www.youtube.com/api/stats/qoe?event=streamingstats&fmt=396&afmt=251&cpn=O7NIYaGypYNDQK8j&ei=KgGtYKuUOJyOzLUP19iQwAY&el=detailpage&docid=QZUeW8cQQbo&ns=yt&fexp=23890959%2C23916968%2C23983296%2C23986029%2C24001373%2C24003105%2C24004644%2C24007246%2C24016852%2C24019954%2C24022819%2C24035275%2C24039110%2C24040786%2C24042868%2C24044575%2C24049122&cl=375387312&seq=1&cbr=Chrome&cbrver=89.0.4389.114&c=WEB&cver=2.20210523.07.00&cplayer=UNIPLAYER&cos=X11&cplatform=DESKTOP&vps=0.000:N,0.007:N&afs=0.007:251::i&vfs=0.007:396:396::r&view=0.007:568:320&bwe=0.007:130000&vis=0.007:0&cmt=0.007:0.000&bh=0.007:0.000 HTTP/2.0
+          << 204  0b
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=251&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=audio%2Fwebm&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=9304472&dur=594.061&lmt=1618735144065843&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAOutXf2olo55h9zuAibxncVN5EKTOZb3XSq30YaYVKLIAiEAynZOVBcyNbSYTvFkyQP-5Fj6id4TYiwdFH66BZjTzHM%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=0-66811&rn=2&rbuf=0
+          << 200 OK 65.25k
+[::1]:34122: clientconnect
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/remote.js HTTP/2.0
+          << 200  30.26k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/captions.js HTTP/2.0
+          << 200  23.11k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/miniplayer.js HTTP/2.0
+          << 200  1.43k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/annotations_module.js HTTP/2.0
+          << 200  19.27k
+[::1]:34114: GET https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxK.woff2 HTTP/2.0
+          << 200  15.32k
+[::1]:34102: GET https://www.youtube.com/api/stats/ads?ver=2&ns=1&event=1&device=1&content_v=QZUeW8cQQbo&el=detailpage&ei=KgGtYKuUOJyOzLUP19iQwAY&devicever=2.20210523.07.00&bti=9477942&break_type=1&conn=0&cpn=O7NIYaGypYNDQK8j&lact=47&m_pos=0&mt=0&p_h=320&p_w=568&rwt=[RWT]&sdkv=h.3.0.0&slot_pos=0&vis=0&vol=100&wt=1621950765852&sli=1&slfs=1&loginael=1 HTTP/2.0
+          << 204  0b
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/endscreen.js HTTP/2.0
+          << 200  6.99k
+[::1]:34122: GET https://securepubads.g.doubleclick.net/pcs/view?xai=AKAOjstIVZ5oJZhsp84rX637j9Z7C6tgIjKOJmbo0XoYCPZB3mknILwKpWYe7mhFSYr3KIhKWz2Z1fTKbE4-wbmr2F5fkqmlJ1lUwTMA_Y2rmjdJt--1QCQdGQhQ3Hloby2K6uawQKuScFFsW1W8KvDkUXLPhHa_mmln4dy9o_RHGFKBiLpQAg8GycfippRRsCEBY5mxB_NRC1NFmX29yH9cFFQb3D69b4dDXwo_HzWkJA7hqf1yGqzz15i-j5ioNXbrCYhR3KPlv5bLW3g-akvWNVy1TJMKlRVJYhDvntnZmRuS8UOc&sig=Cg0ArKJSzHZqW7okzlXuEAE&adurl= HTTP/2.0
+          << 200  0b
+[::1]:34124: clientconnect
+[::1]:34108: GET https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic HTTP/2.0
+          << 200  924b
+[::1]:34108: GET https://fonts.googleapis.com/css?family=Roboto+Mono:400,700 HTTP/2.0
+          << 200  581b
+[::1]:34126: clientconnect
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=396&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278%2C394%2C395%2C396%2C397%2C398%2C399&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=video%2Fmp4&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=12367542&dur=594.000&lmt=1618740551880601&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRAIgPARY7u8eaz1HegOj-YVZ3zedJCPKp0Kipltr31B9f-8CIDrLt3nZ4Xxx7DnMgSmgdvVvXZMbdkpLL7br2L1VLg_N&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=91667-181161&rn=3&rbuf=2061
+          << 200 OK 87.4k
+[::1]:34098: GET https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3D%252Fsignin_passive%26feature%3Dpassive&hl=en HTTP/2.0
+          << 200  462.15k
+::1:34098: ProtocolException("Error in HTTP connection: Http2ZombieException('Connection or stream already dead: 1621950766.640278, False',)",)
+[::1]:34102: GET https://www.youtube.com/getDatasyncIdsEndpoint HTTP/2.0
+          << 200  42b
+[::1]:34124: GET https://googleads.g.doubleclick.net/pagead/id HTTP/2.0
+          << 200  133b
+[::1]:34128: clientconnect
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=396&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278%2C394%2C395%2C396%2C397%2C398%2C399&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=video%2Fmp4&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=12367542&dur=594.000&lmt=1618740551880601&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRAIgPARY7u8eaz1HegOj-YVZ3zedJCPKp0Kipltr31B9f-8CIDrLt3nZ4Xxx7DnMgSmgdvVvXZMbdkpLL7br2L1VLg_N&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=181162-310240&rn=4&rbuf=4122
+          << 200 OK 126.05k
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=251&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=audio%2Fwebm&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=9304472&dur=594.061&lmt=1618735144065843&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAOutXf2olo55h9zuAibxncVN5EKTOZb3XSq30YaYVKLIAiEAynZOVBcyNbSYTvFkyQP-5Fj6id4TYiwdFH66BZjTzHM%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=66812-132347&rn=5&rbuf=4194
+          << 200 OK 64k
+[::1]:34106: GET https://i.ytimg.com/vi_webp/QZUeW8cQQbo/maxresdefault.webp HTTP/2.0
+          << 200  88.65k
+[::1]:34126: GET https://www.google.com/pagead/lvz?evtid=AKB78cjFNuBB-4xUq1qIILFkKeWYFGZkQQkrgSAg4naUg0QnJTTfNv2ZE4-DdNvItjnSX6pWrDAIoKMIfQ0vBG0ILiV1IpO1cw&req_ts=1621950763&pg=MainAppBootstrap%3AWatch&az=1&sigh=AKFpyYWb6JHQTcrQPCDVu9UqodJCJfFJdg HTTP/2.0
+          << 200  42b
+[::1]:34128: GET https://www.gstatic.com/cv/js/sender/v1/cast_sender.js HTTP/2.0
+          << 200  1.96k
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=396&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C278%2C394%2C395%2C396%2C397%2C398%2C399&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=video%2Fmp4&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=12367542&dur=594.000&lmt=1618740551880601&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRAIgPARY7u8eaz1HegOj-YVZ3zedJCPKp0Kipltr31B9f-8CIDrLt3nZ4Xxx7DnMgSmgdvVvXZMbdkpLL7br2L1VLg_N&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=310241-652096&rn=6&rbuf=7640
+          << 200 OK 333.84k
+[::1]:34114: GET https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmEU9fBBc4.woff2 HTTP/2.0
+          << 200  15.55k
+[::1]:34120: GET https://r5---sn-p5qlsnrr.googlevideo.com/videoplayback?expire=1621972362&ei=KgGtYJrMNvHQj-8Pq8mXsAU&ip=2601%3A547%3A902%3A7b0%3Ac9ce%3A289d%3A7962%3A12a9&id=o-AC3nFovvYfrDo4j2X1caonfvSe5ZPcrcUg5v7vOxtR-U&itag=251&source=youtube&requiressl=yes&mh=2O&mm=31%2C29&mn=sn-p5qlsnrr%2Csn-p5qs7nes&ms=au%2Crdu&mv=m&mvi=5&pl=30&initcwndbps=1807500&vprv=1&mime=audio%2Fwebm&ns=Es-wLYZjbPxc5y0oMzwPsjwF&gir=yes&clen=9304472&dur=594.061&lmt=1618735144065843&mt=1621950540&fvip=5&keepalive=yes&fexp=24001373%2C24007246&c=WEB&txp=5531432&n=vPs-DfFHgG2nRA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAOutXf2olo55h9zuAibxncVN5EKTOZb3XSq30YaYVKLIAiEAynZOVBcyNbSYTvFkyQP-5Fj6id4TYiwdFH66BZjTzHM%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRQIhAKPhaO9sIavTW-8sfJuV82eW0LsxbCKrifLbwHAJDwUqAiA9eTKfDzaH51sJSSFecmUuVkK8rK0o3870_c41jg-kBg%3D%3D&alr=yes&cpn=O7NIYaGypYNDQK8j&cver=2.20210523.07.00&range=132348-285582&rn=7&rbuf=8388
+          << 200 OK 149.64k
+[::1]:34128: GET https://www.gstatic.com/eureka/clank/89/cast_sender.js HTTP/2.0
+          << 200  13.93k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/img/favicon.ico HTTP/2.0
+          << 200  155b
+[::1]:34130: clientconnect
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/img/favicon_32.png HTTP/2.0
+          << 200  348b
+[::1]:34106: GET https://i.ytimg.com/vi/ZIgFsRdF8Iw/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCZXJjyIU06zqJ9ADI7lkcWWtLMgw HTTP/2.0
+          << 200  7.12k
+[::1]:34130: GET https://yt3.ggpht.com/ytc/AAUvwngPz00kVrLLAa8TNC31OfNNBpacajMGlQ45HSC6=s48-c-k-c0x00ffffff-no-rj HTTP/2.0
+          << 200  1.12k
+[::1]:34132: clientconnect
+[::1]:34102: POST https://www.youtube.com/youtubei/v1/log_event?alt=json&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8 HTTP/2.0
+          << 200  31b
+[::1]:34106: GET https://i.ytimg.com/vi/f1uFsQ6MUD4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAqhspguctuNteFqeTAJ_bjeJq1Dg HTTP/2.0
+          << 200  4.89k
+[::1]:34106: GET https://i.ytimg.com/vi/RGe-HQXIWSs/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLA2wxNwGsMd2JHFTsctreFBkZn0aA HTTP/2.0
+          << 200  6.01k
+[::1]:34106: GET https://i.ytimg.com/vi/xWjuoVIOD6E/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLD8LhgoEjSseDcdI1jCE5szVluxsw HTTP/2.0
+          << 200  4.94k
+[::1]:34106: GET https://i.ytimg.com/vi/K-4Tkp_2abs/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLCBEkMXcas9oRtrjsH2BQjNaRaKmw HTTP/2.0
+          << 200  7.99k
+[::1]:34102: POST https://www.youtube.com/youtubei/v1/feedback?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8 HTTP/2.0
+          << 200  572b
+[::1]:34106: GET https://i.ytimg.com/vi/O4Z0o1cxAsw/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBmk_WPcPLsgmbvxVJOwzvCgHLiwA HTTP/2.0
+          << 200  6.75k
+[::1]:34106: GET https://i.ytimg.com/vi/inMv0tYxT64/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLC_MqZrkXl2dEMVaoo1R2XHDAX2bw HTTP/2.0
+          << 200  7.62k
+[::1]:34126: GET https://www.google.com/js/th/GQQxwZf0KVCHDQTluKHnwUqOFkjHQR436TWNegyyI0Y.js HTTP/2.0
+          << 200  12.79k
+[::1]:34102: GET https://www.youtube.com/sw.js HTTP/2.0
+          << 200  567b
+[::1]:34106: GET https://i.ytimg.com/vi/C-WGkqifTiI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAaHVYkqwSfr5fJMeosSWT3IeXu7g HTTP/2.0
+          << 200  6.33k
+[::1]:34106: GET https://i.ytimg.com/vi/6Cf3XPHbYuI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAkCCp9wfq3gt4q0mFpLhs4VZyPUg HTTP/2.0
+          << 200  7.95k
+[::1]:34106: GET https://i.ytimg.com/vi/oxAWtM4RPnA/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDxpG4x2sFrMSwntGJ_maXzFecZzw HTTP/2.0
+          << 200  6.39k
+[::1]:34132: GET https://static.doubleclick.net/instream/ad_status.js HTTP/2.0
+          << 200  29b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/serviceworker-kevlar-appshell.vflset/serviceworker-kevlar-appshell.js HTTP/2.0
+          << 200  26.85k
+[::1]:34102: GET https://www.youtube.com/generate_204?hZF4Jg HTTP/2.0
+          << 204  0b
+[::1]:34102: GET https://www.youtube.com/sw.js_data HTTP/2.0
+          << 200  1.09k
+[::1]:34102: GET https://www.youtube.com/app_shell HTTP/2.0
+          << 200  25.16k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/web-animations-next-lite.min.vflset/web-animations-next-lite.min.js HTTP/2.0
+          << 200  14.79k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/www-prepopulator.vflset/www-prepopulator.js HTTP/2.0
+          << 200  285b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/scheduler.vflset/scheduler.js HTTP/2.0
+          << 200  2.5k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/custom-elements-es5-adapter.vflset/custom-elements-es5-adapter.js HTTP/2.0
+          << 200  708b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-onepick.css HTTP/2.0
+          << 200  239b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/www-tampering.vflset/www-tampering.js HTTP/2.0
+          << 200  3.45k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/www-i18n-constants-en_US.vflset/www-i18n-constants.js HTTP/2.0
+          << 200  1.34k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-main-desktop-watch-page-skeleton.css HTTP/2.0
+          << 200  929b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/cssbin/www-main-desktop-home-page-skeleton.css HTTP/2.0
+          << 200  698b
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/miniplayer.js HTTP/2.0
+          << 200  1.43k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/remote.js HTTP/2.0
+          << 200  30.26k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/endscreen.js HTTP/2.0
+          << 200  6.99k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/network.vflset/network.js HTTP/2.0
+          << 200  5.14k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/webcomponents-sd.vflset/webcomponents-sd.js HTTP/2.0
+          << 200  20.81k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/spf.vflset/spf.js HTTP/2.0
+          << 200  12.96k
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/captions.js HTTP/2.0
+          << 200  23.11k
+[::1]:34106: GET https://i.ytimg.com/vi/QZUeW8cQQbo/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB2Te1igE8SDPzLPHOLyrXnd1U7Kw HTTP/2.0
+          << 200  17.6k
+[::1]:34106: GET https://i.ytimg.com/vi/QZUeW8cQQbo/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB2Te1igE8SDPzLPHOLyrXnd1U7Kw HTTP/2.0
+          << 200  17.6k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/www-searchbox.vflset/www-searchbox.js HTTP/2.0
+          << 200  65.71k
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/img/favicon_144.png HTTP/2.0
+          << 200  15.89k
+[::1]:34126: GET https://www.google.com/pagead/1p-user-list/962985656/?backend=innertube&cname=1&cver=2_20210523&data=backend%3Dinnertube%3Bcname%3D1%3Bcver%3D2_20210523%3Bptype%3Df_view%3Btype%3Dview%3Butuid%3DBlOtMAWn6nQpChhRo14CYA%3Butvid%3DQZUeW8cQQbo&is_vtc=0&ptype=f_view&random=571561545&utuid=BlOtMAWn6nQpChhRo14CYA HTTP/2.0
+          << 200  42b
+::1:34106: ProtocolException("Error in HTTP connection: Http2ZombieException('Connection or stream already dead: 1621950769.5235996, False',)",)
+[::1]:34102: GET https://www.youtube.com/ptracking?html5=1&video_id=QZUeW8cQQbo&cpn=O7NIYaGypYNDQK8j&ei=KgGtYKuUOJyOzLUP19iQwAY&ptk=youtube_single&oid=HlxMVHaZ3KuzCQreNcAhsA&ptchn=BlOtMAWn6nQpChhRo14CYA&pltype=content HTTP/2.0
+          << 204  0b
+[::1]:34102: GET https://www.youtube.com/api/stats/playback?ns=yt&el=detailpage&cpn=O7NIYaGypYNDQK8j&docid=QZUeW8cQQbo&ver=2&cmt=0.222&ei=KgGtYKuUOJyOzLUP19iQwAY&fmt=396&fs=0&rt=3.424&of=6WFtGgsc5dQt5Iijye80qA&euri&lact=327&cl=375387312&mos=0&vm=CAEQARgEKiBpaGFvRkVWTjlSWVFGbThWMzd3VVFUTEthLVUtQ2cyODoyQU9HdF9PS1BVU3l0Nk9wazI2TFFscmlrYkRZLW05dGJHTVNTVUZLcW1CZXR0N0M5SHc&volume=100&cbr=Chrome&cbrver=89.0.4389.114&c=WEB&cver=2.20210523.07.00&cplayer=UNIPLAYER&cos=X11&cplatform=DESKTOP&hl=en_US&cr=US&len=594.061&fexp=23890959%2C23916968%2C23983296%2C23986029%2C24001373%2C24003105%2C24004644%2C24007246%2C24016852%2C24019954%2C24022819%2C24035275%2C24039110%2C24040786%2C24042868%2C24044575%2C24049122&rtn=8&afmt=251&muted=0 HTTP/2.0
+          << 204  0b
+[::1]:34102: GET https://www.youtube.com/pagead/viewthroughconversion/962985656/?backend=innertube&cname=1&cver=2_20210523&data=backend%3Dinnertube%3Bcname%3D1%3Bcver%3D2_20210523%3Bptype%3Df_view%3Btype%3Dview%3Butuid%3DBlOtMAWn6nQpChhRo14CYA%3Butvid%3DQZUeW8cQQbo&foc_id=BlOtMAWn6nQpChhRo14CYA&label=followon_view&ptype=f_view&random=710842867&utuid=BlOtMAWn6nQpChhRo14CYA HTTP/2.0
+          << 302  42b
+[::1]:34102: GET https://www.youtube.com/s/player/8523e85c/player_ias.vflset/en_US/base.js HTTP/2.0
+          << 200  465.28k
+[::1]:34124: GET https://googleads.g.doubleclick.net/pagead/viewthroughconversion/962985656/?backend=innertube&cname=1&cver=2_20210523&data=backend%3Dinnertube%3Bcname%3D1%3Bcver%3D2_20210523%3Bptype%3Df_view%3Btype%3Dview%3Butuid%3DBlOtMAWn6nQpChhRo14CYA%3Butvid%3DQZUeW8cQQbo&foc_id=BlOtMAWn6nQpChhRo14CYA&label=followon_view&ptype=f_view&random=710842867&utuid=BlOtMAWn6nQpChhRo14CYA&cv_attributed=0 HTTP/2.0
+          << 302  42b
+[::1]:34126: GET https://www.google.com/pagead/1p-user-list/962985656/?backend=innertube&cname=1&cver=2_20210523&data=backend%3Dinnertube%3Bcname%3D1%3Bcver%3D2_20210523%3Bptype%3Df_view%3Btype%3Dview%3Butuid%3DBlOtMAWn6nQpChhRo14CYA%3Butvid%3DQZUeW8cQQbo&label=followon_view&ptype=f_view&random=710842867&is_vtc=0&random=4158992890 HTTP/2.0
+          << 200  42b
+[::1]:34102: GET https://www.youtube.com/s/desktop/589757bc/jsbin/desktop_polymer.vflset/desktop_polymer.js HTTP/2.0
+          << 200  1.15m
+[::1]:34102: GET https://www.youtube.com/sw.js_data HTTP/2.0
+          << 200  1.09k
+[::1]:34102: POST https://www.youtube.com/youtubei/v1/notification_registration/set_registration?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8 HTTP/2.0
+          << 200  545b

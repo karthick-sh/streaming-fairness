@@ -203,10 +203,11 @@ if __name__ == "__main__":
     data_dir = "Data/"
     trace_dir = "Traces/"
     num_runs = 1
-    dev_interface = "ens5"
+    dev_interface = "wlo1"
 
     input("Running {}, press ENTER to continue...".format(abr))
 
     for idx, trace_name in enumerate(traces):
         print("~~~~~~~~~`[{}] - {}~~~~~~~~~~~~~~~".format(idx, trace_name))
         mainHeterogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_interval, num_runs, dev_interface)
+        
