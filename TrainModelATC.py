@@ -13,8 +13,9 @@ from sklearn.model_selection import GridSearchCV
 from matplotlib.patches import Patch
 from matplotlib.lines import Line2D
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.ensemble import IsolationForest
+import pickle
 
 import numpy as np
 import pandas as pd
@@ -78,7 +79,7 @@ class ATCDataParser:
         
         for videoProvider in glob.glob("{}/FeedbackResults/*".format(dataDir)):
             videoProviderName = videoProvider.split("/")[-1]
-            if videoProviderName not in ["Twitch", "TubiTV"]:
+            if videoProviderName not in ["YouTube"]:
                 continue
             print(videoProviderName)
 
@@ -144,8 +145,10 @@ class ATCDataParser:
                 for _ in range(len(filtered_tc), self.options["bw"]["windowSize"]):
                     filtered_tc.append(0)
                 feature += filtered_tc
-                for estimator in self.tput_estimators:
-                    feature.append(estimator(filtered_tc))
+                # for estimator in self.tput_estimators:
+                #     feature.append(estimator(filtered_tc))
+
+            self.firstBufferIdx = len(feature)
 
             # Buffer level (in a given window size)
             if "buf" in self.options:
@@ -173,6 +176,8 @@ class ATCDataParser:
                     filtered_prev_dt.append(0)
                 feature += filtered_prev_dt
 
+
+            self.firstBitrateIdx = len(feature)
             # Previous packet bitrate
             if "prevBitrate" in self.options:
                 filtered_prev_bitrate = raw_df["bitrate_level"].iloc[max(0,idx-self.options["prevBitrate"]["windowSize"]):idx].values.tolist()
@@ -213,6 +218,9 @@ class TrainModel:
         self.bitrateCutoffs = data.bitrateCutoffs
         self.qoeOutputDir = qoeOutputDir
 
+        self.firstBufferIdx = data.firstBufferIdx
+        self.firstBitrateIdx = data.firstBitrateIdx
+
     def classificationSuite(self):
         accuracies = {}
 
@@ -243,9 +251,32 @@ class TrainModel:
 
         for abr in self.X_train:
             print("Training PolynomialRegression for", abr)
-            accuracies[abr] = {"LinReg": self.testLinearRegression(degree=2, abr=abr)}
+            accuracies[abr] = {
+                "LinReg": self.testLinearRegression(degree=3, abr=abr),
+                "PrevBitrate": self.testSimpleClassifier(abr)
+            }
 
         print()
+        return accuracies
+
+    def testSimpleClassifier(self, abr):
+        accuracies = []
+        rmses = []
+        f1s = []
+ 
+        for traceVideoPair in self.X_test_files[abr]:
+            X_test = self.X_test_files[abr][traceVideoPair]
+            y_test = self.y_test_files[abr][traceVideoPair]
+            y_pred = [x_test_f[-1] for x_test_f in X_test]
+            
+            accuracies.append(self.accuracyWithCutoff(y_test, y_pred, X_test, traceVideoPair, abr))
+            rmses.append(self.rmse(y_test, y_pred))
+            f1s.append(self.f1score(y_test, y_pred, traceVideoPair, abr))
+
+        print("Average Test RMSE: ", np.mean(rmses))
+        print("Average Test Accuracy: ", np.mean(accuracies))
+        print("Average Test F1 Score: ", np.mean(f1s))
+    
         return accuracies
 
     def testLinearRegression(self, degree, abr):
@@ -254,8 +285,11 @@ class TrainModel:
         X_train_poly = poly.fit_transform(self.X_train[abr])
         poly.fit(X_train_poly, self.y_train[abr])
         print("Done with poly.fit")
-        reg = LinearRegression()
+        reg = Ridge()
         reg.fit(X_train_poly, self.y_train[abr])
+
+        with open("./Data/Models/{}.pickle".format(abr), "wb") as of:
+            pickle.dump(reg, of)
         print("Done with reg.fit")
 
         accuracies = []
@@ -318,7 +352,7 @@ class TrainModel:
                         break
                 # print(org[i], pred[i], predBitrate, orgBitrate)
                 # print(x_test)
-                of.write("{},{},{}\n".format(x_test[i][19], org[i], pred[i]))
+                of.write("{},{},{}\n".format(x_test[i][self.firstBufferIdx], org[i], pred[i]))
                 if orgBitrate == predBitrate:
                     correct += 1
 
@@ -475,10 +509,10 @@ def most_frequent(l):
 def main():
     featureGroups =[
         {
-            "bw": {"windowSize": 7},
-            "buf": {"windowSize": 7},
+            "bw": {"windowSize": 3},
+            "buf": {"windowSize": 3},
             # "prevDownloadTime": {"windowSize": 7},
-            "prevBitrate": {"windowSize": 7},
+            "prevBitrate": {"windowSize": 1},
             # "prevMbit": {"windowSize": 7},
             # "prevThroughput": {"windowSize": 7}
         },

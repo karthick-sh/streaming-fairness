@@ -4,35 +4,61 @@ import time
 import random
 random.seed(15213)
 
-from multiprocessing import Process
+from multiprocessing import Process, Manager
+from scipy.stats import hmean
 from selenium.common.exceptions import ElementClickInterceptedException
 from TrafficController import TrafficController
 from Barrier import Barrier
 from PufferPlayer import PufferPlayer
 from YouTubePlayer import YouTubePlayer
+from QOEOptimization import QOEOptimization
+from collections import deque
 
 NUM_BROWSERS = 4
 MAX_TRACE_LEN = 320 #seconds
+TP = 4
 
 def killWebdrivers():
     os.system('killall %s' % ("chromedriver"))
+    os.system('killall chrome')
 
-def incrementTC(tc, barrier):
+def incrementTC(tc, inputDict, barrier):
     barrier.wait()
     start = time.time()
     t = start
+    bwWindow = deque(maxlen=20)
     while True:
         if time.time() - t > 1:
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             print(tc.bIdx, time.time() - start + tc.times[0], nextBw)
             if nextBw is None:
                 break
+            bwWindow.appendleft(nextBw)
+
+            w_list = []
+            for _ in range(TP):
+                w_list.append(hmean(w_list[::-1] + list(bwWindow)))
+            inputDict["W"] = w_list
             tc.throttleTC(nextBw)
             t = time.time()
 
         time.sleep(0.5)
 
-def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface):
+def runOptimizationProblem(inputDict, outputDict, barrier, abrList):
+    barrier.wait()
+    opt = QOEOptimization(abrList, TP)
+
+    start = time.time()
+    t = start
+    while True:
+        if time.time() - t > 1:
+            inputs = dict(inputDict)
+            shapedBW = opt.runOneIteration(inputs)
+            for i in range(len(shapedBW)):
+                outputDict[i] = shapedBW[i]
+            t = time.time()
+
+def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface, abrList):
     for run in range(numRuns):
         print("=======RUN {}-{}=======".format(NUM_BROWSERS, run))
         killWebdrivers()
@@ -41,7 +67,11 @@ def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, 
 
         processes = []
 
-        barrier = Barrier(NUM_BROWSERS+1)
+        barrier = Barrier(NUM_BROWSERS+2)
+
+        manager = Manager()
+        optInputDict = manager.dict()
+        optOutputDict = manager.dict()
 
         for player_num in range(1, NUM_BROWSERS+1):
             processes.append(Process(
@@ -57,29 +87,39 @@ def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, 
                     abr,
                     trace_file,
                     datapointsInterval,
-                    output_path
+                    output_path,
+                    optInputDict,
+                    optOutputDict
                 )
             ))
 
         for p in processes:
             p.start()
 
-        tc_process = Process(target=incrementTC, args=(tc, barrier))
+        tc_process = Process(target=incrementTC, args=(tc, optInputDict, barrier))
         tc_process.start()
+
+        opt_process = Process(target=runOptimizationProblem, args=(optInputDict, optOutputDict, barrier, abrList))
+        opt_process.start()
 
         tc_process.join()
         for p in processes:
             p.join()
 
         time.sleep(1)
+        opt_process.terminate()
         for p in processes:
             p.terminate()
         killWebdrivers()
 
         time.sleep(10)
 
-def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr, traceFile, datapointsInterval, output_path):
+def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr, traceFile, datapointsInterval, output_path, inputDict, outputDict):
     output_file = os.path.join(output_path, "{}-{}-{}_{}".format(abr, NUM_BROWSERS, run, playerNum))
+    optimized_bw_file = os.path.join(output_path, "allocated_bw-{}".format(playerNum))
+    optimized_bw_file = open(optimized_bw_file, "w")
+    optimized_bw_file.write("time,bandwidth\n")
+
     browser = player(link, output_file, playerNum, True)
 
     while True:
@@ -101,8 +141,15 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     numDatapointsCollected = 0
     start = time.time()
     t = start
+
+    bwWindow = deque(maxlen=3)
+    bwWindow.appendleft(0)
+    bwWindow.appendleft(0)
+    bwWindow.appendleft(0)
+    # bwWindow.appendleft(tc.getNextBW(tc.times[0]))
+    nextBw = 0
     while True:
-        res = browser.collectData()
+        res, details = browser.collectData(nextBw)
         numDatapointsCollected += 1
 
         # Exit condition
@@ -110,7 +157,22 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
-            # browser.throttle(nextBw/NUM_BROWSERS)
+            # bwWindow.appendleft(nextBw)
+            details["bandwidth"] = list(bwWindow)
+            inputDict[playerNum] = details
+
+            if playerNum-1 in outputDict:
+                print("[{}] - Throttling to {}".format(playerNum, outputDict[playerNum-1]))
+                browser.throttle(outputDict[playerNum-1])
+                bwWindow.appendleft(outputDict[playerNum-1])
+                optimized_bw_file.write("{},{}\n".format(t, outputDict[playerNum-1]))
+            # if "youtube" in link:
+            #     print("[{}] - Throttling YT to {}".format(playerNum, nextBw))
+            #     browser.throttle(nextBw*0.1)
+            # else:
+            #     print("[{}] - Throttling puffer to {}".format(playerNum, nextBw))
+            #     browser.throttle(nextBw*0.4)
+            
             print("[{}] - {}({}) - {}".format(playerNum, tc.bIdx, nextBw, res))
             t = time.time()
 
@@ -121,6 +183,8 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     browser.driver.quit()
 
     browser.stopDisplay()
+
+    optimized_bw_file.close()
 
     return True
 
@@ -151,7 +215,7 @@ def mainHomogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_inte
     threadOrchestrator(players, abr, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
 
 
-def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datapoints_interval, num_runs, dev_interface):
+def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datapoints_interval, num_runs, dev_interface, abrList):
     # Make result directories
     if not os.path.isdir(data_dir + composition):
         os.mkdir(data_dir + composition)
@@ -180,7 +244,7 @@ def mainHeterogeneous(data_dir, trace_dir, trace_name, composition, links, datap
                 "link": links[i],
             })
 
-    threadOrchestrator(players, composition, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface)
+    threadOrchestrator(players, composition, trace_dir, trace_name, datapoints_interval, num_runs, output_path, dev_interface, abrList)
 
 def get_trace_list(trace_file):
     with open(trace_file) as f:
@@ -190,15 +254,18 @@ def get_trace_list(trace_file):
 if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
-    # link = "http://3.234.178.171:8080/player/"
+    # link = "http://34.205.55.8:8080/player/"
     # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
     links = [
         "https://www.youtube.com/watch?v=QZUeW8cQQbo",
         "https://www.youtube.com/watch?v=QZUeW8cQQbo",
-        "http://18.206.136.34:8080/player/",
-        "http://18.206.136.34:8080/player/",
+        "http://3.234.182.127:8080/player/",
+        "http://3.234.182.127:8080/player/",
     ]
-    abr = "youtube-2-bola-2"
+    abrList = [
+        "YouTube", "YouTube", "mpc", "mpc"
+    ]
+    abr = "final-yt-mpc-tp-4-g-1"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"
@@ -209,5 +276,5 @@ if __name__ == "__main__":
 
     for idx, trace_name in enumerate(traces):
         print("~~~~~~~~~`[{}] - {}~~~~~~~~~~~~~~~".format(idx, trace_name))
-        mainHeterogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_interval, num_runs, dev_interface)
+        mainHeterogeneous(data_dir, trace_dir, trace_name, abr, links, datapoints_interval, num_runs, dev_interface, abrList)
         

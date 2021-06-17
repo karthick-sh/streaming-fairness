@@ -11,13 +11,14 @@ from pyvirtualdisplay import Display
 import pandas as pd
 from datetime import datetime
 import time, sys, argparse, glob, random, string 
+from collections import deque
 
 class YouTubePlayer:
     def __init__(self, link, output_file, userNum, headless=False):
         # self.display = Display(visible=0, size=(1920, 1080))
         # self.display.start()
 
-        path_to_extension = r'/home/karthick-sh/Desktop/streaming-fairness/extensions/1.34.0_0'
+        path_to_extension = r'/home/karthick-sh/Desktop/streaming-fairness/extensions/5.1.2_0'
         chrome_options = Options()
         chrome_options.add_argument('load-extension=' + path_to_extension)
         chrome_options.add_argument('--disable-application-cache')
@@ -61,6 +62,10 @@ class YouTubePlayer:
             "rebuffering"
         ))
 
+        self.bufferWindow = deque(maxlen=3)
+        for _ in range(3):
+            self.bufferWindow.appendleft(0)
+
     def play(self):
         self.driver.execute_script("document.getElementsByTagName('video')[0].play()")
 
@@ -93,7 +98,8 @@ class YouTubePlayer:
 
         wait = WebDriverWait(self.driver, 60)
         # actions = ActionChains(self.driver)
-
+        
+        self.driver.switch_to.window(self.driver.window_handles[0])
         # Wait for video element to load
         self.video = wait.until(EC.element_to_be_clickable((By.TAG_NAME, "video")))
 
@@ -119,7 +125,7 @@ class YouTubePlayer:
     def stopDisplay(self):
         return
 
-    def collectData(self):
+    def collectData(self, currentBW):
         details = {}
 
         # Collect required stats
@@ -132,9 +138,9 @@ class YouTubePlayer:
         details["currentTime"] =  self.driver.execute_script("return document.getElementsByTagName('video')[0].currentTime")
         details["time"] = time.time() - self.startTime
         details["rebuffering"] = 0
-
+        
         if int(video_h) == 0:
-            return "ERROR:: t: {}, video:{}x{}, viewport:{}x{}".format(details["currentTime"], video_w, video_h, viewport_w, viewport_h)
+            return "ERROR:: t: {}, video:{}x{}, viewport:{}x{}".format(details["currentTime"], video_w, video_h, viewport_w, viewport_h), {}
 
         if int(video_h) != self.widthsToHeights[int(video_w)]:
             print("Height not same, got {}, expected {}".format(video_h, self.widthsToHeights[int(video_w)])) 
@@ -175,7 +181,13 @@ class YouTubePlayer:
             details["rebuffering"]
         ))
 
-        return "{} - {} on ({}x{})".format(details["currentTime"], details["resolution"], viewport_w, viewport_h)
+        self.bufferWindow.appendleft(float(details["bufferHealth"]))
+
+        outputs = {
+            "buffer": list(self.bufferWindow),
+            "bitrate": float(details["bitrate"])
+        }
+        return "{} - {} on ({}x{})".format(details["currentTime"], details["resolution"], viewport_w, viewport_h), outputs
 
 def convertTSToS(ts):
     date_time = datetime.strptime(ts, "%H:%M:%S")

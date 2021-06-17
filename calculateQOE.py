@@ -46,13 +46,11 @@ def calcAverageQOE(df, bitrate_col):
     return np.average(QoEs)
 
 if __name__ == "__main__":
-    dataDir = "Data/atc-data-qoe"
+    dataDir = "Data/puffer-data-qoe"
     originalAvgQOEs = []
     predictedAvgQOEs = []
     for abr in glob.glob("{}/*".format(dataDir)):
         abrName = abr.split("/")[-1]
-        if abrName not in ["Twitch", "TubiTV"]:
-            continue
         for trace in glob.glob("{}/*".format(abr)):
             df = pd.read_csv(trace)
             traceNum = trace.split("/")[-1]

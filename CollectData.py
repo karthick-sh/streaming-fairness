@@ -165,8 +165,8 @@ def countNumLines(traceDir):
 if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
-    link = "http://3.236.180.116:8080/player/"
-    abr = "mpc"
+    link = "http://34.205.55.8:8080/player/"
+    abr = "bola"
     datapoints_interval = 1
     data_dir = "Data/ReverseEngineering/"
     trace_dir = "Traces/"
@@ -178,4 +178,3 @@ if __name__ == "__main__":
     for idx, traceName in enumerate(traces):
         print("~~~~~~~~~`[{}] - {}~~~~~~~~~~~~~~~".format(idx, traceName))
         runTrace(data_dir, trace_dir, traceName, abr, link, datapoints_interval, num_runs, dev_interface)
-        break

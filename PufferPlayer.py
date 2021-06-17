@@ -57,6 +57,10 @@ class PufferPlayer:
             "currentBW"
         ))
 
+        self.bufferWindow = deque(maxlen=3)
+        for _ in range(3):
+            self.bufferWindow.appendleft(0)
+
     def play(self):
         self.driver.execute_script("document.getElementsByTagName('video')[0].play()")
 
@@ -166,7 +170,14 @@ class PufferPlayer:
             details["currentBW"],
         ))
 
-        return "{} - {}".format(details["currentTime"], details["resolution"]), details
+        self.bufferWindow.appendleft(float(details["bufferHealth"]))
+
+        outputs = {
+            "buffer": list(self.bufferWindow),
+            "bitrate": float(details["bitrate"])
+        }
+
+        return "{} - {}".format(details["currentTime"], details["resolution"]), outputs
 
 
     def bufferCleared(self):
