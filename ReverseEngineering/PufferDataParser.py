@@ -118,6 +118,8 @@ class PufferDataParser:
             
             featuresForTrace, bitrates = self.getAllFeatures(player_data_df, proxy_har, byteLengthRanges, bitrateRanges)
 
+            print(len(featuresForTrace))
+            
             if trace_name in testPairs:
                 self.X_test_files[self.abr][trace_name] = featuresForTrace
                 self.y_test_files[self.abr][trace_name] = bitrates
@@ -133,6 +135,7 @@ class PufferDataParser:
                 maxBR = player_data_df[player_data_df["resolution"] == res]["bitrate"].max()
                 avgBR = (minBR+maxBR) / 2 / 1000
                 self.bitrateCutoffs[self.abr][vidHeight] = avgBR
+
 
         print("Train:", len(self.X_train[self.abr]), len(self.y_train[self.abr]))
         print("Feature Length: ", len(self.X_train[self.abr][0]))

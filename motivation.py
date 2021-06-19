@@ -46,17 +46,17 @@ def incrementTC(tc, inputDict, barrier):
 
 def runOptimizationProblem(inputDict, outputDict, barrier, abrList):
     barrier.wait()
-    opt = QOEOptimization(abrList, TP)
+    # opt = QOEOptimization(abrList, TP)
 
-    start = time.time()
-    t = start
-    while True:
-        if time.time() - t > 1:
-            inputs = dict(inputDict)
-            shapedBW = opt.runOneIteration(inputs)
-            for i in range(len(shapedBW)):
-                outputDict[i] = shapedBW[i]
-            t = time.time()
+    # start = time.time()
+    # t = start
+    # while True:
+    #     if time.time() - t > 1:
+    #         inputs = dict(inputDict)
+    #         shapedBW = opt.runOneIteration(inputs)
+    #         for i in range(len(shapedBW)):
+    #             outputDict[i] = shapedBW[i]
+    #         t = time.time()
 
 def threadOrchestrator(players, abr, trace_dir, trace_file, datapointsInterval, numRuns, output_path, dev_interface, abrList):
     for run in range(numRuns):
@@ -146,7 +146,6 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
     bwWindow.appendleft(0)
     bwWindow.appendleft(0)
     bwWindow.appendleft(0)
-    # bwWindow.appendleft(tc.getNextBW(tc.times[0]))
     nextBw = 0
     while True:
         res, details = browser.collectData(nextBw)
@@ -157,21 +156,17 @@ def threadInstance(player, playerNum, tc, run, NUM_BROWSERS, barrier, link, abr,
             nextBw = tc.getNextBW(time.time() - start + tc.times[0])
             if nextBw is None: # and (time.time() - start) >= MAX_TRACE_LEN
                 break
-            # bwWindow.appendleft(nextBw)
-            details["bandwidth"] = list(bwWindow)
-            inputDict[playerNum] = details
+            # details["bandwidth"] = list(bwWindow)
+            # inputDict[playerNum] = details
 
-            if playerNum-1 in outputDict:
-                print("[{}] - Throttling to {}".format(playerNum, outputDict[playerNum-1]))
-                browser.throttle(outputDict[playerNum-1])
-                bwWindow.appendleft(outputDict[playerNum-1])
-                optimized_bw_file.write("{},{}\n".format(t, outputDict[playerNum-1]))
-            # if "youtube" in link:
-            #     print("[{}] - Throttling YT to {}".format(playerNum, nextBw))
-            #     browser.throttle(nextBw*0.1)
-            # else:
-            #     print("[{}] - Throttling puffer to {}".format(playerNum, nextBw))
-            #     browser.throttle(nextBw*0.4)
+            # if playerNum-1 in outputDict:
+            #     print("[{}] - Throttling to {}".format(playerNum, outputDict[playerNum-1]))
+            #     browser.throttle(outputDict[playerNum-1])
+            #     bwWindow.appendleft(outputDict[playerNum-1])
+            #     optimized_bw_file.write("{},{}\n".format(t, outputDict[playerNum-1]))
+
+            # print("[{}] - Throttling to {}".format(playerNum, nextBw))
+            # browser.throttle(nextBw/4)
             
             print("[{}] - {}({}) - {}".format(playerNum, tc.bIdx, nextBw, res))
             t = time.time()
@@ -258,14 +253,14 @@ if __name__ == "__main__":
     # link = "https://www.youtube.com/watch?v=QZUeW8cQQbo"
     links = [
         "https://www.youtube.com/watch?v=QZUeW8cQQbo",
-        "https://www.youtube.com/watch?v=QZUeW8cQQbo",
         "http://3.234.182.127:8080/player/",
-        "http://3.234.182.127:8080/player/",
+        "http://3.235.21.99:8080/player/",
+        "http://3.231.226.156:8080/player/",
     ]
     abrList = [
-        "YouTube", "YouTube", "mpc", "mpc"
+        "YouTube", "MPC", "BOLA", "BBA"
     ]
-    abr = "final-yt-mpc-tp-4-g-1"
+    abr = "final-diverse-bba-natural"
     datapoints_interval = 1
     data_dir = "Data/"
     trace_dir = "Traces/"

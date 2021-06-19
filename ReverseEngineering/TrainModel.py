@@ -72,8 +72,10 @@ class TrainModel:
         f1s = []
  
         for trace in self.X_test_files[abr]:
+            print("test trace: ", trace)
             X_test = self.X_test_files[abr][trace]
             y_test = self.y_test_files[abr][trace]
+            print(X_test)
             X_test_poly = poly.fit_transform(X_test)
             y_pred = reg.predict(X_test_poly)
             
@@ -152,7 +154,7 @@ def main():
     featureGroupAccuracies = []
     xAxisLabels = []
  
-    data = PufferDataParser("./Data/ReverseEngineering/mpc", "mpc", featureGroup)
+    data = PufferDataParser("./Data/ReverseEngineering/pensieve", "pensieve", featureGroup)
     suite = TrainModel(data, "./Data/puffer-data-qoe")
     accuracies = suite.classificationSuite()
 

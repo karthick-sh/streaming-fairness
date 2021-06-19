@@ -165,8 +165,8 @@ def countNumLines(traceDir):
 if __name__ == "__main__":
     # traces = random.sample(os.listdir("Traces/"), 100)
     traces = get_trace_list("pensieve_traces.txt")
-    link = "http://34.205.55.8:8080/player/"
-    abr = "bola"
+    link = "http://3.231.226.156:8080/player/"
+    abr = "pensieve"
     datapoints_interval = 1
     data_dir = "Data/ReverseEngineering/"
     trace_dir = "Traces/"
